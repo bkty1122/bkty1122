@@ -2,6 +2,7 @@
 import pygame
 from sudoku_generator import sudoku
 
+# trial
 
 # initialise the pygame font
 pygame.font.init()
