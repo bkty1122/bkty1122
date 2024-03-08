@@ -36,8 +36,9 @@ class web_scrapping_d2():
         data_unclean
         date_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
         df_data_unclean = pd.DataFrame(data_unclean, columns = ['horse_no','index', 'category', 'date','document_name','view','Link'])
+        df_data_unclean = df_data_unclean.fillna(value= "N/A")
         df_data_clean = df_data_unclean.loc[df_data_unclean['document_name'].str.contains(self.keywords)]
-        df_data_clean.to_csv(self.path + 'completed_D2_search' + date_time + '.csv', header = ['horse_no','index', 'category', 'date','document_name','view','Link'], index=False)
+        df_data_clean.to_csv(self.path + date_time + '_completed_D2_search.csv', header = ['horse_no','index', 'category', 'date','document_name','view','Link'], index=False)
         return print(f"File has successfully exported to {path}")
     
     @staticmethod
@@ -50,4 +51,4 @@ class web_scrapping_d2():
             return data_list
 
 # Test
-web_scrapping_d2(csv_file_path, 'ecg', path).export_csv()
+web_scrapping_d2(csv_file_path, 'CT Examination', path).export_csv()
