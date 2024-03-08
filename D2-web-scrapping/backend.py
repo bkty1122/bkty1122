@@ -10,7 +10,7 @@ path = 'C:/Users/beckytykwok/Documents/Python/D2-web-scrapping-mini-program/'
 
 class web_scrapping_d2():
     def __init__(self, horse_no, keywords ,path):
-        self.horse_no = self.convert_csv_to_list(horse_no)
+        self.horse_no = self.convert_csv_to_list(horse_no) # user select list of horse_no from csv
         self.keywords = str.lower(keywords)
         self.path = path
     def web_scrap(self):
@@ -40,7 +40,6 @@ class web_scrapping_d2():
         df_data_clean = df_data_unclean.loc[df_data_unclean['document_name'].str.contains(self.keywords)]
         df_data_clean.to_csv(self.path + date_time + '_completed_D2_search.csv', header = ['horse_no','index', 'category', 'date','document_name','view','Link'], index=False)
         return print(f"File has successfully exported to {path}")
-    
     @staticmethod
     def convert_csv_to_list(csv_file):
         with open(csv_file, 'r') as file:
@@ -49,6 +48,7 @@ class web_scrapping_d2():
             for row in csv_reader:
                 data_list.extend(row)
             return data_list
+
 
 # Test
 web_scrapping_d2(csv_file_path, 'CT Examination', path).export_csv()
