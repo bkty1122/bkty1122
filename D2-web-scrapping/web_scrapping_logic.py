@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import pandas as pd
 import urllib.request
-import csv
+import datetime
 
 csv_file_path = 'Horse_No.csv'
 
@@ -33,11 +33,12 @@ class web_scrapping_d2():
     def export_csv(self):
         data_unclean = self.web_scrap()
         data_unclean
+        date_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
         df_data_unclean = pd.DataFrame(data_unclean, columns = ['horse_no','index', 'category', 'date','document_name','view','Link'])
-        df_data_unclean = df_data_unclean.fillna(value= "N/A")
         df_data_clean = df_data_unclean.loc[df_data_unclean['document_name'].str.contains(self.keywords)]
-        df_data_clean.to_csv(self.path + 'df_data_clean.csv', header = ['horse_no','index', 'category', 'date','document_name','view','Link'], index=False)
+        df_data_clean.to_csv(self.path + 'completed_D2_search' + date_time + '.csv', header = ['horse_no','index', 'category', 'date','document_name','view','Link'], index=False)
         return print(f"File has successfully exported to {path}")
+    
     @staticmethod
     def convert_csv_to_list(csv_file):
         with open(csv_file, 'r') as file:

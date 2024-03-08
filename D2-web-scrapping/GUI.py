@@ -2,10 +2,11 @@
 Use library PYQT5 from module qtpy to make a user interface for the web scrapping program
 '''
 import sys
+import PyQt5.QtWidgets as pyqt5
 
 sys.path.insert(0, "./D2-web-scrapping/lib/python3.10/site-packages")
 
-import PyQt5.QtWidgets as pyqt5
+
 
 def dialog():
     mbox = pyqt5.QMessageBox()
