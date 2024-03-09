@@ -39,7 +39,7 @@ class web_scrapping_d2():
         df_data_unclean = df_data_unclean.fillna(value= "N/A")
         df_data_clean = df_data_unclean.loc[df_data_unclean['document_name'].str.contains(self.keywords)]
         df_data_clean.to_csv(self.path + date_time + '_completed_D2_search.csv', header = ['horse_no','index', 'category', 'date','document_name','view','Link'], index=False)
-        return print(f"File has successfully exported to {path}")
+        return print(f"File has successfully exported to {self.path}")
     @staticmethod
     def convert_csv_to_list(csv_file):
         with open(csv_file, 'r') as file:
