@@ -1,0 +1,6 @@
+{
+    "azureResourceGroups.showHiddenTypes": true,
+    "files.exclude": {
+        "**/.git": false
+    }
+}
