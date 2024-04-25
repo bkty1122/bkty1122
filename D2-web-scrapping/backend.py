@@ -4,13 +4,9 @@ import urllib.request
 import datetime
 import csv
 
-csv_file_path = 'Horse_No.csv'
-
-path = 'C:/Users/beckytykwok/Documents/Python/D2-web-scrapping-mini-program/'
-
-class web_scrapping_d2():
+class WebScrapingD2():
     def __init__(self, horse_no, keywords ,path):
-        self.horse_no = self.convert_csv_to_list(horse_no) # user select list of horse_no from csv
+        self.horse_no = self.convert_csv_to_list(horse_no)
         self.keywords = str.lower(keywords)
         self.path = path
     def web_scrap(self):
@@ -32,23 +28,16 @@ class web_scrapping_d2():
             print(f'Horse No {i} has successfully added to the list.')
         return data_unclean
     def export_csv(self):
-        data_unclean = self.web_scrap()
-        data_unclean
-        date_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-        df_data_unclean = pd.DataFrame(data_unclean, columns = ['horse_no','index', 'category', 'date','document_name','view','Link'])
-        df_data_unclean = df_data_unclean.fillna(value= "N/A")
-        df_data_clean = df_data_unclean.loc[df_data_unclean['document_name'].str.contains(self.keywords)]
-        df_data_clean.to_csv(self.path + date_time + '_completed_D2_search.csv', header = ['horse_no','index', 'category', 'date','document_name','view','Link'], index=False)
-        return print(f"File has successfully exported to {self.path}")
+        data = self.web_scrap()
+        now = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        filepath = f"{self.path}/{now}_completed_D2_search.csv"
+        df = pd.DataFrame(data, columns=['horse_no', 'index', 'category', 'date', 'document_name', 'view', 'Link']).fillna(value= "N/A")
+        df = df[df['document_name'].str.contains(self.keywords)]
+        df.to_csv(filepath, index=False)
+        print(f"File has been exported to {filepath}")
+        
     @staticmethod
     def convert_csv_to_list(csv_file):
-        with open(csv_file, 'r') as file:
-            csv_reader = csv.reader(file)
-            data_list = []
-            for row in csv_reader:
-                data_list.extend(row)
-            return data_list
-
-
-# Test
-web_scrapping_d2(csv_file_path, 'CT Examination', path).export_csv()
+        with open(csv_file, mode='r', newline='', encoding='utf-8') as file:
+            reader = csv.reader(file)
+            return [row[0] for row in reader if row]  # Read only the first column which is assumed to contain horse numbers
