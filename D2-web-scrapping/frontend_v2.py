@@ -34,7 +34,7 @@ class GUI(tk.Tk):
         self.geometry("350x250")
         
         # add logo to the app
-        self.logo = tk.PhotoImage(file="icon.ico")
+        self.logo = tk.PhotoImage(file="icon.png")
         self.iconphoto(False, self.logo)
 
         tk.Label(self, text="Horse No:").grid(row=0, column=0)
@@ -55,7 +55,7 @@ class GUI(tk.Tk):
 
         # Status bar
         self.status = tk.Label(self, text="", bd=1, relief=tk.SUNKEN, anchor=tk.W)
-        self.status.grid(row=5, column=0, columnspan=3, sticky=tk.W+tk.E, rowspan=2)
+        self.status.grid(row=5, column=0, columnspan=3, sticky=tk.W+tk.E)
 
     def browse_horse_no(self):
         file_path = filedialog.askopenfilename(title="Open File", filetypes=(("CSV Files", "*.csv"),))
