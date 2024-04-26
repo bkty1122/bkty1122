@@ -3,6 +3,12 @@ from tkinter import filedialog, messagebox
 from backend import WebScrapingD2
 import threading
 
+'''
+https://stackoverflow.com/questions/9539566/how-can-i-make-portable-python-desktop-application 
+For packing app into exe file
+'''
+
+
 class ScraperThread(threading.Thread):
     def __init__(self, horse_no_file, keywords, path, callback_success, callback_error, update_status):
         super().__init__()
