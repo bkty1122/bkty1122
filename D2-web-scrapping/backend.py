@@ -5,16 +5,19 @@ import datetime
 import csv
 
 class WebScrapingD2():
-    def __init__(self, horse_no, keywords ,path):
+    def __init__(self, horse_no, keywords, path, update_status=None):
         self.horse_no = self.convert_csv_to_list(horse_no)
         self.keywords = str.lower(keywords)
         self.path = path
+        self.update_status = update_status
+
     def web_scrap(self):
         url_link = "https://edpapp.corp.hkjc.com:8243/drs_cr/src/vdislist.jsp?keyword="
         url_link_end = "&year=&category="
         data_unclean = []
-        # Loop through the list of horse_no, and return the data_unclean with beautifulsoup
         for i in self.horse_no:
+            if self.update_status:
+                self.update_status(f'Scraping: Horse No {i}')
             url_link_full = urllib.request.urlopen(url_link + i + url_link_end)
             tree = BeautifulSoup(url_link_full, "lxml")
             tab_tag = tree.select("table")[1]
