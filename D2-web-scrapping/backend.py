@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import pandas as pd
+from html.parser import HTMLParser
 import urllib.request
 import datetime
 import csv
@@ -29,14 +29,33 @@ class WebScrapingD2():
             data_unclean.extend(tab_data)
             # data_unclean.pop(0)
             print(f'Horse No {i} has successfully added to the list.')
+            
+        # try to use html.parser for web scraping
+        parser = HTMLParser()
+        for i in self.horse_no:
+            if self.update_status:
+                self.update_status(f'Scraping: Horse No {i}')
+            url_link_full = urllib.request.urlopen(url_link + i + url_link_end)
+            # get the html content
+            html_content = url_link_full.read().decode('utf-8')
+            # parse the html content
+            parser.feed(html_content)
+            
+        
         return data_unclean
+    
     def export_csv(self):
         data = self.web_scrap()
         now = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
         filepath = f"{self.path}/{now}_completed_D2_search.csv"
-        df = pd.DataFrame(data, columns=['horse_no', 'index', 'category', 'date', 'document_name', 'view', 'Link']).fillna(value= "N/A")
-        df = df[df['document_name'].str.contains(self.keywords)]
-        df.to_csv(filepath, index=False)
+        
+        with open(filepath, mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow(['horse_no', 'index', 'category', 'date', 'document_name', 'view', 'Link'])
+            for row in data:
+                if self.keywords in row[4]:  # Assuming 'document_name' is the fifth element
+                    writer.writerow(row)
+        
         print(f"File has been exported to {filepath}")
         
     @staticmethod

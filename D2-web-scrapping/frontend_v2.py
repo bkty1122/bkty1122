@@ -55,7 +55,7 @@ class GUI(tk.Tk):
 
         # Status bar
         self.status = tk.Label(self, text="", bd=1, relief=tk.SUNKEN, anchor=tk.W)
-        self.status.grid(row=5, column=0, columnspan=3, sticky=tk.W+tk.E)
+        self.status.grid(row=8, column=1, columnspan=3, sticky=tk.W+tk.E, rowspan=3)
 
     def browse_horse_no(self):
         file_path = filedialog.askopenfilename(title="Open File", filetypes=(("CSV Files", "*.csv"),))
