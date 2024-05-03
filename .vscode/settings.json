@@ -2,5 +2,6 @@
     "azureResourceGroups.showHiddenTypes": true,
     "files.exclude": {
         "**/.git": false
-    }
+    },
+    "cmake.sourceDirectory": "C:/Personal Project/bkty1122/comic-generator/cmake-3.29.1/Auxiliary/bash-completion"
 }
