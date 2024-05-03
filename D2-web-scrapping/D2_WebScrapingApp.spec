@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['frontend.py'],
+    ['D2_scrapy.py'],
     pathex=[],
     binaries=[],
     datas=[],
