@@ -55,13 +55,19 @@ class WebScrapingD2():
             writer = csv.writer(file)
             writer.writerow(['horse_no', 'index', 'category', 'date', 'document_name', 'view', 'Link'])
             for row in data:
-                if self.keywords in row[4]:  # Assuming 'document_name' is the fifth element
+                # assume that the 'document_name' is the fifth column
+                # prevent error if the 'document_name' is empty
+                if len(row) >= 5:
+                    if self.keywords in row[4]:
+                        writer.writerow(row)
+                else:
                     writer.writerow(row)
-        
         print(f"File has been exported to {filepath}")
         
     @staticmethod
     def convert_csv_to_list(csv_file):
         with open(csv_file, mode='r', newline='', encoding='utf-8') as file:
             reader = csv.reader(file)
-            return [row[0] for row in reader if row]  # Read only the first column which is assumed to contain horse numbers
+            # clear empty rows and return only the first column, clear symbol
+            col = [row[0].replace(' ', '') for row in reader if row]
+            return col  # Read only the first column which is assumed to contain horse numbers
