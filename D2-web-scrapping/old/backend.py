@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from html.parser import HTMLParser
 import urllib.request
 import datetime
 import csv
@@ -28,8 +29,21 @@ class WebScrapingD2():
             data_unclean.extend(tab_data)
             # data_unclean.pop(0)
             print(f'Horse No {i} has successfully added to the list.')
+            
+        # try to use html.parser for web scraping
+        parser = HTMLParser()
+        for i in self.horse_no:
+            if self.update_status:
+                self.update_status(f'Scraping: Horse No {i}')
+            url_link_full = urllib.request.urlopen(url_link + i + url_link_end)
+            # get the html content
+            html_content = url_link_full.read().decode('utf-8')
+            # parse the html content
+            parser.feed(html_content)
+            
+        
         return data_unclean
-
+    
     def export_csv(self):
         data = self.web_scrap()
         now = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
@@ -39,19 +53,13 @@ class WebScrapingD2():
             writer = csv.writer(file)
             writer.writerow(['horse_no', 'index', 'category', 'date', 'document_name', 'view', 'Link'])
             for row in data:
-                # assume that the 'document_name' is the fifth column
-                # prevent error if the 'document_name' is empty
-                if len(row) >= 5:
-                    if self.keywords in row[4]:
-                        writer.writerow(row)
-                else:
-                    pass
+                if self.keywords in row[4]:  # Assuming 'document_name' is the fifth element
+                    writer.writerow(row)
+        
         print(f"File has been exported to {filepath}")
         
     @staticmethod
     def convert_csv_to_list(csv_file):
         with open(csv_file, mode='r', newline='', encoding='utf-8') as file:
             reader = csv.reader(file)
-            # clear empty rows and return only the first column, clear symbol
-            col = [row[0].replace(' ', '') for row in reader if row]
-            return col  # Read only the first column which is assumed to contain horse numbers
+            return [row[0] for row in reader if row]  # Read only the first column which is assumed to contain horse numbers
