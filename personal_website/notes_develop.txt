@@ -1,0 +1,5 @@
+Create react template:
+
+terminal: npx create-react-app personal_website
+cd personal_website
+npm start
