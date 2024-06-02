@@ -3,3 +3,7 @@ Create react template:
 terminal: npx create-react-app personal_website
 cd personal_website
 npm start
+
+docker:
+docker build -t personal_website .
+docker run -p 3000:5000 personal_website

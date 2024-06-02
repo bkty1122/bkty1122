@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Docker Node.js Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node",
+            "node": {
+                "package": "${workspaceFolder}/personal_website/node_modules/dir-glob/package.json",
+                "localRoot": "${workspaceFolder}/personal_website/node_modules/dir-glob"
+            }
+        }
+    ]
+}

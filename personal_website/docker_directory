@@ -1,0 +1,9 @@
+Location of docker: personal_website\node_modules\dir-glob
+
+cd the location of docker: personal_website\node_modules\dir-glob
+
+build docker image: docker build -t personal_website .
+
+The docker image is built and can be run using the following command:
+
+docker run -p 3000:3000 personal_website
