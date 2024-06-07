@@ -1,12 +1,3 @@
-/workspaces/bkty1122/build/CMakeFiles/install/strip.dir
-/workspaces/bkty1122/build/CMakeFiles/install/local.dir
-/workspaces/bkty1122/build/CMakeFiles/install.dir
-/workspaces/bkty1122/build/CMakeFiles/list_install_components.dir
-/workspaces/bkty1122/build/CMakeFiles/rebuild_cache.dir
-/workspaces/bkty1122/build/CMakeFiles/edit_cache.dir
-/workspaces/bkty1122/build/bash-completion/CMakeFiles/install/strip.dir
-/workspaces/bkty1122/build/bash-completion/CMakeFiles/install/local.dir
-/workspaces/bkty1122/build/bash-completion/CMakeFiles/install.dir
-/workspaces/bkty1122/build/bash-completion/CMakeFiles/list_install_components.dir
-/workspaces/bkty1122/build/bash-completion/CMakeFiles/rebuild_cache.dir
-/workspaces/bkty1122/build/bash-completion/CMakeFiles/edit_cache.dir
+C:/Personal Project/bkty1122/build/CMakeFiles/INSTALL.dir
+C:/Personal Project/bkty1122/build/CMakeFiles/ALL_BUILD.dir
+C:/Personal Project/bkty1122/build/CMakeFiles/ZERO_CHECK.dir
